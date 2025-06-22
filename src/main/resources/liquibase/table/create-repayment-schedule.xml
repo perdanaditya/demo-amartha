@@ -1,0 +1,24 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="2c8f23d1-b8c5-4bc8-a98a-2b61da51990d" author="rizkyperdana">
+        <createTable tableName="repayment_schedule">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" type="TIMESTAMP"/>
+            <column name="version" type="BIGINT" defaultValueComputed="0"/>
+
+            <column name="week" type="INT"/>
+            <column name="amount" type="DECIMAL(19,2)"/>
+            <column name="due_date" type="DATE"/>
+            <column name="status" type="VARCHAR(50)"/>
+            <column name="loan_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_repayment_loan" references="loan(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
