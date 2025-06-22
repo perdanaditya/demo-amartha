@@ -1,21 +1,21 @@
 # Loan Engine V1
 ## Tech Stack
 
-| Layer           | Teknologi                         |
-|----------------|-----------------------------------|
-| Backend        | Java 17, Spring Boot 3.5.3        |
-| Database       | HSQLDB |
-| ORM            | Spring Data JPA                   |
-| Build Tool     | Maven                             |
-| Dependency Injection | Spring Framework                  |
-| Testing        | JUnit 5, Mockito      |
+| Layer           | Technology                 |
+|----------------|----------------------------|
+| Backend        | Java 17, Spring Boot 3.5.3 |
+| Database       | HSQLDB                     |
+| ORM            | Spring Data JPA            |
+| Build Tool     | Maven                      |
+| Dependency Injection | Spring Framework           |
+| Testing        | JUnit 5, Mockito           |
 
 ---
 
 ## Initial Data
 
 ### Loan Data
-| Loan ID                                 | Keterangan                                                     |
+| Loan ID                                 | Description                                                    |
 |----------------------------------------|----------------------------------------------------------------|
 | 13e96370-f415-4697-b5c5-7765d8a780b9   | Tidak ada repayment dengan status pending hingga 22 Juni 2025  |
 | 4c8ba930-2edb-4c62-a3a2-e83f46969d47   | Memiliki 3 repayment dengan status pending hingga 22 Juni 2025 |
@@ -94,3 +94,12 @@ Response Body:
 - Numeric Result (200)
 - Loan Not Found (400)
 ```
+### ✅ Key Assumptions
+| Assumption                     | Description                                                             |
+|------------------------|-------------------------------------------------------------------------|
+| 📅 Loan starts at creation time | Assumes loan begins the day it's created                                |
+| 💰 No partial or early payments	| All payments must be exact and due (not future weeks)                   |
+| 🧾 Flat interest	| No amortization or compound interest, just flat 10% per annum           |
+| 👥 Single-customer loan	| Each loan is assigned to one Customer, no co-signers or shared loans    |
+| 📄 Payment status is binary	| Each repayment is either `PENDING` or `PAID`, with no in-between        |
+| 🔄 System-configurable rates	| Principal amount and interest rate can be loaded from DB (SystemConfig) | 
