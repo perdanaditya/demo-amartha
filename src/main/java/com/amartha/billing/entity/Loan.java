@@ -32,6 +32,6 @@ public class Loan extends AuditSection implements Serializable {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "loan")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "loan")
     private List<RepaymentSchedule> repaymentSchedules;
 }

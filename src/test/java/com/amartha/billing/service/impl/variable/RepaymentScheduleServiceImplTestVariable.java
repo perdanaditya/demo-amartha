@@ -1,6 +1,7 @@
 package com.amartha.billing.service.impl.variable;
 
 import com.amartha.billing.constant.PaymentStatus;
+import com.amartha.billing.entity.Loan;
 import com.amartha.billing.entity.RepaymentSchedule;
 
 import java.math.BigDecimal;
@@ -8,6 +9,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 public class RepaymentScheduleServiceImplTestVariable {
     protected static final BigDecimal PRINCIPAL = new BigDecimal("1000000");
@@ -16,6 +18,20 @@ public class RepaymentScheduleServiceImplTestVariable {
     protected static final BigDecimal TOTAL_PAYABLE = PRINCIPAL.add(TOTAL_INTEREST);
     protected static final BigDecimal WEEKLY_INSTALLMENT = TOTAL_PAYABLE.divide(BigDecimal.valueOf(50), 0, java.math.RoundingMode.UP);
 
+    protected static final UUID LOAN_ID = UUID.randomUUID();
+    protected static final Loan LOAN = Loan.builder()
+            .id(LOAN_ID)
+            .repaymentSchedules(Arrays.asList(
+                    RepaymentSchedule.builder()
+                            .dueDate(LocalDate.now().minusDays(10))
+                            .status(PaymentStatus.PAID)
+                            .build(),
+                    RepaymentSchedule.builder()
+                            .dueDate(LocalDate.now().minusDays(5))
+                            .status(PaymentStatus.PENDING)
+                            .build()
+            ))
+            .build();
     protected static final List<RepaymentSchedule> ALL_PENDING_DUE = Arrays.asList(
             RepaymentSchedule.builder()
                     .week(1)

@@ -49,8 +49,8 @@ public class LoanServiceImpl implements LoanService {
                 .customer(customer)
                 .principalAmount(principalAmount)
                 .annualInterestRate(annualInterestRate)
-                .repaymentSchedules(repaymentScheduleService.populateRepaymentSchedules(principalAmount, annualInterestRate))
                 .build();
+        loan.setRepaymentSchedules(repaymentScheduleService.populateRepaymentSchedules(loan, principalAmount, annualInterestRate));
         return loanRepository.save(loan).getId();
     }
 

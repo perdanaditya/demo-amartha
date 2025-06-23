@@ -56,7 +56,7 @@ class LoanServiceImplTest extends LoanServiceImplTestVariable {
     void createLoan_success_existingCustomer() {
         when(systemConfigService.getAnnualInterestRate()).thenReturn(ANNUAL_INTEREST_RATE);
         when(customerService.saveOrGet(EXISTING_CUSTOMER_REQUEST)).thenReturn(EXISTING_CUSTOMER);
-        when(repaymentScheduleService.populateRepaymentSchedules(any(), any()))
+        when(repaymentScheduleService.populateRepaymentSchedules(any(), any(), any()))
                 .thenReturn(REPAYMENT_SCHEDULES);
         when(loanRepository.save(any(Loan.class)))
                 .thenAnswer(inv -> {
@@ -70,7 +70,7 @@ class LoanServiceImplTest extends LoanServiceImplTestVariable {
         assertEquals(LOAN_ID, result);
         verify(systemConfigService).getAnnualInterestRate();
         verify(customerService).saveOrGet(EXISTING_CUSTOMER_REQUEST);
-        verify(repaymentScheduleService).populateRepaymentSchedules(any(), any());
+        verify(repaymentScheduleService).populateRepaymentSchedules(any(), any(), any());
         verify(loanRepository).save(any(Loan.class));
     }
 
@@ -78,7 +78,7 @@ class LoanServiceImplTest extends LoanServiceImplTestVariable {
     void createLoan_success_newCustomer_withPrincipal() {
         when(systemConfigService.getAnnualInterestRate()).thenReturn(ANNUAL_INTEREST_RATE);
         when(customerService.saveOrGet(NEW_CUSTOMER_REQUEST)).thenReturn(EXISTING_CUSTOMER);
-        when(repaymentScheduleService.populateRepaymentSchedules(any(), any()))
+        when(repaymentScheduleService.populateRepaymentSchedules(any(), any(), any()))
                 .thenReturn(REPAYMENT_SCHEDULES);
         when(loanRepository.save(any(Loan.class))).thenAnswer(inv -> {
             Loan l = inv.getArgument(0);
@@ -91,7 +91,7 @@ class LoanServiceImplTest extends LoanServiceImplTestVariable {
         assertEquals(LOAN_ID, result);
         verify(systemConfigService).getAnnualInterestRate();
         verify(customerService).saveOrGet(NEW_CUSTOMER_REQUEST);
-        verify(repaymentScheduleService).populateRepaymentSchedules(any(), any());
+        verify(repaymentScheduleService).populateRepaymentSchedules(any(), any(), any());
         verify(loanRepository).save(any(Loan.class));
     }
 
@@ -100,7 +100,7 @@ class LoanServiceImplTest extends LoanServiceImplTestVariable {
         when(systemConfigService.getAnnualInterestRate()).thenReturn(ANNUAL_INTEREST_RATE);
         when(systemConfigService.getPrincipalAmount()).thenReturn(PRINCIPAL_AMOUNT);
         when(customerService.saveOrGet(NEW_CUSTOMER_REQUEST)).thenReturn(EXISTING_CUSTOMER);
-        when(repaymentScheduleService.populateRepaymentSchedules(any(), any()))
+        when(repaymentScheduleService.populateRepaymentSchedules(any(), any(), any()))
                 .thenReturn(REPAYMENT_SCHEDULES);
         when(loanRepository.save(any(Loan.class))).thenAnswer(inv -> {
             Loan l = inv.getArgument(0);
@@ -114,7 +114,7 @@ class LoanServiceImplTest extends LoanServiceImplTestVariable {
         verify(systemConfigService).getAnnualInterestRate();
         verify(systemConfigService).getPrincipalAmount();
         verify(customerService).saveOrGet(NEW_CUSTOMER_REQUEST);
-        verify(repaymentScheduleService).populateRepaymentSchedules(any(), any());
+        verify(repaymentScheduleService).populateRepaymentSchedules(any(), any(), any());
         verify(loanRepository).save(any(Loan.class));
     }
 

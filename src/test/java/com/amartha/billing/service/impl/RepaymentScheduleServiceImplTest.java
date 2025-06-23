@@ -40,7 +40,7 @@ class RepaymentScheduleServiceImplTest extends RepaymentScheduleServiceImplTestV
     @Test
     void populateRepaymentSchedules_returnsCorrectList() {
         List<RepaymentSchedule> schedules = repaymentScheduleService
-                .populateRepaymentSchedules(PRINCIPAL, ANNUAL_INTEREST);
+                .populateRepaymentSchedules(LOAN, PRINCIPAL, ANNUAL_INTEREST);
         assertEquals(50, schedules.size());
         assertTrue(schedules
                 .stream()

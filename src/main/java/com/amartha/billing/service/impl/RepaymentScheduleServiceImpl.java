@@ -1,6 +1,7 @@
 package com.amartha.billing.service.impl;
 
 import com.amartha.billing.constant.PaymentStatus;
+import com.amartha.billing.entity.Loan;
 import com.amartha.billing.entity.RepaymentSchedule;
 import com.amartha.billing.repository.RepaymentScheduleRepository;
 import com.amartha.billing.service.RepaymentScheduleService;
@@ -20,7 +21,7 @@ public class RepaymentScheduleServiceImpl implements RepaymentScheduleService {
     private final RepaymentScheduleRepository repaymentScheduleRepository;
 
     @Override
-    public List<RepaymentSchedule> populateRepaymentSchedules(BigDecimal principalAmount, BigDecimal annualInterestRate) {
+    public List<RepaymentSchedule> populateRepaymentSchedules(Loan loan, BigDecimal principalAmount, BigDecimal annualInterestRate) {
         List<RepaymentSchedule> repaymentSchedules = new ArrayList<>();
 
         BigDecimal totalInterest = principalAmount.multiply(annualInterestRate);
@@ -34,6 +35,7 @@ public class RepaymentScheduleServiceImpl implements RepaymentScheduleService {
                     .amount(weeklyInstallment)
                     .status(PaymentStatus.PENDING)
                     .dueDate(LocalDate.now().plusWeeks(week))
+                    .loan(loan)
                     .build();
             repaymentSchedules.add(schedule);
         }
