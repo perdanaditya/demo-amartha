@@ -10,96 +10,92 @@ import com.amartha.billing.service.model.LoanServiceRequest;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class LoanServiceImplTestVariable {
-
+    protected static final BigDecimal ANNUAL_INTEREST_RATE = new BigDecimal("0.12");
+    protected static final BigDecimal PRINCIPAL_AMOUNT = new BigDecimal("1000000");
     protected static final UUID LOAN_ID = UUID.randomUUID();
-    protected static final UUID CUSTOMER_ID = UUID.randomUUID();
-    protected static final String PRINCIPAL_AMOUNT = "5000000";
-    protected static final String ANNUAL_INTEREST = "0.10";
-    protected static final BigDecimal PRINCIPAL_AMOUNT_BD = new BigDecimal(PRINCIPAL_AMOUNT);
-    protected static final BigDecimal ANNUAL_INTEREST_BD = new BigDecimal(ANNUAL_INTEREST);
-
-    protected static final SystemConfig PRINCIPAL_CONFIG = SystemConfig.builder().value(PRINCIPAL_AMOUNT).build();
-    protected static final SystemConfig INTEREST_CONFIG = SystemConfig.builder().value(ANNUAL_INTEREST).build();
 
     protected static final Customer EXISTING_CUSTOMER = Customer.builder()
-            .id(CUSTOMER_ID)
-            .fullName("Test")
-            .email("test@email.com")
+            .id(UUID.randomUUID())
+            .fullName("Existing Customer")
             .build();
 
-    protected static final CustomerServiceRequest NEW_CUSTOMER = CustomerServiceRequest.builder()
-            .fullName("Test")
-            .email("test@email.com")
+    protected static final Customer NEW_CUSTOMER = Customer.builder()
+            .id(UUID.randomUUID())
+            .fullName("New Customer")
+            .build();
+
+    protected static final CustomerServiceRequest EXISTING_CUSTOMER_REQUEST = CustomerServiceRequest.builder()
+            .fullName("Existing Customer")
+            .build();
+
+    protected static final CustomerServiceRequest NEW_CUSTOMER_REQUEST = CustomerServiceRequest.builder()
+            .fullName("New Customer")
             .build();
 
     protected static final LoanServiceRequest LOAN_REQUEST_EXISTING_CUSTOMER = LoanServiceRequest.builder()
-            .customer(CustomerServiceRequest.builder().id(CUSTOMER_ID).build())
-            .amount(PRINCIPAL_AMOUNT_BD)
+            .customer(EXISTING_CUSTOMER_REQUEST)
+            .amount(PRINCIPAL_AMOUNT)
             .build();
 
     protected static final LoanServiceRequest LOAN_REQUEST_NEW_CUSTOMER = LoanServiceRequest.builder()
-            .customer(NEW_CUSTOMER)
-            .amount(PRINCIPAL_AMOUNT_BD)
+            .customer(NEW_CUSTOMER_REQUEST)
+            .amount(PRINCIPAL_AMOUNT)
             .build();
+
     protected static final LoanServiceRequest LOAN_REQUEST_NEW_CUSTOMER_NO_PRINCIPAL = LoanServiceRequest.builder()
-            .customer(NEW_CUSTOMER)
+            .customer(NEW_CUSTOMER_REQUEST)
+            .amount(null)
             .build();
 
-    protected static final RepaymentSchedule PENDING_SCHEDULE = RepaymentSchedule.builder()
-            .status(PaymentStatus.PENDING)
-            .amount(new BigDecimal("110000"))
-            .dueDate(LocalDate.now().minusDays(1))
-            .build();
-
-    protected static final RepaymentSchedule PAID_SCHEDULE = RepaymentSchedule.builder()
-            .status(PaymentStatus.PAID)
-            .amount(new BigDecimal("110000"))
-            .dueDate(LocalDate.now().minusWeeks(2))
-            .build();
-
-    protected static final Loan LOAN_WITH_NO_SCHEDULE = Loan.builder()
-            .id(LOAN_ID)
-            .repaymentSchedules(new ArrayList<>())
-            .build();
+    protected static final List<RepaymentSchedule> REPAYMENT_SCHEDULES = Arrays.asList(
+            RepaymentSchedule.builder()
+                    .id(UUID.randomUUID())
+                    .amount(new BigDecimal("110000"))
+                    .dueDate(LocalDate.now().minusDays(1))
+                    .status(PaymentStatus.PENDING)
+                    .build()
+    );
 
     protected static final Loan LOAN_DELINQUENT = Loan.builder()
             .id(LOAN_ID)
-            .repaymentSchedules(new ArrayList<>(List.of(
+            .repaymentSchedules(Arrays.asList(
                     RepaymentSchedule.builder()
+                            .dueDate(LocalDate.now().minusDays(10))
                             .status(PaymentStatus.PENDING)
-                            .dueDate(LocalDate.now().minusWeeks(2))
                             .build(),
                     RepaymentSchedule.builder()
+                            .dueDate(LocalDate.now().minusDays(5))
                             .status(PaymentStatus.PENDING)
-                            .dueDate(LocalDate.now().minusWeeks(1))
                             .build()
-            )))
+            ))
             .build();
 
     protected static final Loan LOAN_NOT_DELINQUENT = Loan.builder()
             .id(LOAN_ID)
-            .repaymentSchedules(new ArrayList<>(List.of(
-                    PAID_SCHEDULE,
+            .repaymentSchedules(Arrays.asList(
                     RepaymentSchedule.builder()
+                            .dueDate(LocalDate.now().minusDays(10))
+                            .status(PaymentStatus.PAID)
+                            .build(),
+                    RepaymentSchedule.builder()
+                            .dueDate(LocalDate.now().minusDays(5))
                             .status(PaymentStatus.PENDING)
-                            .dueDate(LocalDate.now().plusWeeks(1))
                             .build()
-            )))
+            ))
+            .build();
+
+    protected static final Loan LOAN_WITH_NO_SCHEDULE = Loan.builder()
+            .id(LOAN_ID)
+            .repaymentSchedules(Collections.emptyList())
             .build();
 
     protected Loan generateLoanWithPendingSchedule() {
         return Loan.builder()
                 .id(LOAN_ID)
-                .repaymentSchedules(List.of(RepaymentSchedule.builder()
-                        .status(PaymentStatus.PENDING)
-                        .amount(new BigDecimal("110000"))
-                        .dueDate(LocalDate.now().minusDays(1))
-                        .build()))
+                .repaymentSchedules(new ArrayList<>(REPAYMENT_SCHEDULES))
                 .build();
     }
 }

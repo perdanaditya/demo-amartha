@@ -1,0 +1,13 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+<changeSet id="35119ecb-76bc-468a-8b7b-79f634de5279" author="rizkyperdana">
+    <loadUpdateData
+            file="liquibase/data/csv/system-config-20250621.csv"
+            separator=";"
+            tableName="SYSTEM_CONFIG"
+            primaryKey="id"/>
+</changeSet>
+</databaseChangeLog>

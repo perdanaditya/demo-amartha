@@ -1,0 +1,12 @@
+com\amartha\billing\service\impl\variable\LoanServiceImplTestVariable.class
+com\amartha\billing\service\impl\variable\SystemConfigServiceImplTestVariable.class
+com\amartha\billing\inbound\LoanV1ControllerTest.class
+com\amartha\billing\util\JSONHelperTest$Dummy.class
+com\amartha\billing\service\impl\CustomerServiceImplTest.class
+com\amartha\billing\service\impl\variable\CustomerServiceImplTestVariable.class
+com\amartha\billing\service\impl\LoanServiceImplTest.class
+com\amartha\billing\service\impl\variable\RepaymentScheduleServiceImplTestVariable.class
+com\amartha\billing\util\JSONHelperTest.class
+com\amartha\billing\service\impl\RepaymentScheduleServiceImplTest.class
+com\amartha\billing\inbound\variable\LoanV1ControllerTestVariable.class
+com\amartha\billing\service\impl\SystemConfigServiceImplTest.class

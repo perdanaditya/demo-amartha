@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 public enum ErrorConstant {
 
     ANNUAL_INTEREST_RATES_NOT_YET_AVAILABLE(HttpStatus.NOT_FOUND, "BLG404001", "Annual Interest Rate not yet available, please set first."),
+    PRINCIPAL_AMOUNT_NOT_AVAILABLE(HttpStatus.NOT_FOUND, "BLG404001", "Principal amount not available, please set first."),
     CUSTOMER_NOT_FOUND(HttpStatus.NOT_FOUND, "BLG404002", "Customer not found."),
     LOAN_NOT_FOUND(HttpStatus.NOT_FOUND, "BLG404003", "Loan not found."),
     PAID_AMOUNT_NOT_EQUAL_WITH_CURRENT_REPAYMENT_AMOUNT(HttpStatus.BAD_REQUEST, "BLG400001", "Amount not equal with current repayment amount, paid amount %s, repayment amount %s"),

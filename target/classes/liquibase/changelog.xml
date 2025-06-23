@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <include file="table/create-customer.xml" relativeToChangelogFile="true"/>
+    <include file="table/create-system-config.xml" relativeToChangelogFile="true"/>
+    <include file="table/create-loan.xml" relativeToChangelogFile="true"/>
+    <include file="table/create-repayment-schedule.xml" relativeToChangelogFile="true"/>
+    <include file="data/create_annual_interest_rates_and_default_loan_amount.xml" relativeToChangelogFile="true"/>
+    <include file="data/create_existing_loan_data.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>

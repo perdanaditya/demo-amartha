@@ -1,0 +1,25 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="4649d39d-2c43-4110-a696-cb4bd421b8ed" author="rizkyperdana">
+        <loadUpdateData
+                file="liquibase/data/csv/customer-20250621.csv"
+                separator=";"
+                tableName="CUSTOMER"
+                primaryKey="id"/>
+
+        <loadUpdateData
+                file="liquibase/data/csv/loan-20250621.csv"
+                separator=";"
+                tableName="LOAN"
+                primaryKey="id"/>
+
+        <loadUpdateData
+                file="liquibase/data/csv/repayment-schedule-20250621.csv"
+                separator=";"
+                tableName="REPAYMENT_SCHEDULE"
+                primaryKey="id"/>
+    </changeSet>
+</databaseChangeLog>
